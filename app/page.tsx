@@ -3,6 +3,7 @@ import { HydrationBoundary } from "@tanstack/react-query";
 
 import { fetchTasks } from "@/app/utils/fetchTasks";
 import { fetchMoods } from "@/app/utils/fetchMoods";
+import { QUERY_KEYS } from "@/app/utils/queryKeys";
 
 import DailyInsightsSummary from "@/app/components/DailyInsightsSummary";
 import MoodTracker from "@/app/components/MoodTracker";
@@ -16,8 +17,8 @@ export default async function Page() {
   const tasks = await fetchTasks();
   const moods = await fetchMoods();
 
-  queryClient.setQueryData(["tasks"], tasks);
-  queryClient.setQueryData(["moods"], moods);
+  queryClient.setQueryData([QUERY_KEYS.TASKS], tasks);
+  queryClient.setQueryData([QUERY_KEYS.MOODS], moods);
 
   return (
     <HydrationBoundary state={dehydratedState}>
