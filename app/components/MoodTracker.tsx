@@ -2,8 +2,10 @@
 
 import { useState } from "react";
 
+import { Mood } from "@/app/types";
+
 export default function MoodTracker() {
-  const [moods, setMoods] = useState<{ date: string; moodScore: number }[]>([]);
+  const [moods, setMoods] = useState<Mood[]>([]);
 
   const addMood = (moodScore: number) => {
     const today = new Date().toISOString().split("T")[0];

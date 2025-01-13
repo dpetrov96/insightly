@@ -1,7 +1,8 @@
 "use client";
 
 import { useQuery } from "@tanstack/react-query";
-import { Mood, Task } from "../types";
+
+import { Mood, Task } from "@/app/types";
 
 export default function DailyInsightsSummary() {
   const { data: tasks } = useQuery<Task[]>({ queryKey: ["tasks"], queryFn: () => [] });

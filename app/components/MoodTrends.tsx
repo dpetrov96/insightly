@@ -3,7 +3,8 @@
 import { useQuery } from "@tanstack/react-query";
 import { Line } from "react-chartjs-2";
 import "chart.js/auto";
-import { Mood } from "../types";
+
+import { Mood } from "@/app/types";
 
 export default function MoodTrends() {
   const { data: moods } = useQuery<Mood[]>({ queryKey: ["moods"], queryFn: () => [] });

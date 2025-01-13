@@ -1,7 +1,8 @@
 "use client";
 
 import { useQuery } from "@tanstack/react-query";
-import { Mood } from "../types";
+
+import { Mood } from "@/app/types";
 
 export default function MoodAnalysis() {
   const { data: moods } = useQuery<Mood[]>({ queryKey: ["moods"], queryFn: () => [] });
