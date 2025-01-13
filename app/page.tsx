@@ -14,11 +14,15 @@ export default async function Page() {
   const queryClient = new QueryClient();
   const dehydratedState = dehydrate(queryClient);
 
-  const tasks = await fetchTasks();
-  const moods = await fetchMoods();
+  await queryClient.prefetchQuery({
+    queryKey: [QUERY_KEYS.TASKS],
+    queryFn: fetchTasks,
+  });
 
-  queryClient.setQueryData([QUERY_KEYS.TASKS], tasks);
-  queryClient.setQueryData([QUERY_KEYS.MOODS], moods);
+  await queryClient.prefetchQuery({
+    queryKey: [QUERY_KEYS.MOODS],
+    queryFn: fetchMoods,
+  });
 
   return (
     <HydrationBoundary state={dehydratedState}>

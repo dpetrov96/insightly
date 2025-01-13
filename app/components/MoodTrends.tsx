@@ -4,11 +4,12 @@ import { useQuery } from "@tanstack/react-query";
 import { Line } from "react-chartjs-2";
 import "chart.js/auto";
 
+import { fetchMoods } from "@/app/utils/fetchMoods";
 import { Mood } from "@/app/types";
 import { QUERY_KEYS } from "@/app/utils/queryKeys";
 
 export default function MoodTrends() {
-  const { data: moods } = useQuery<Mood[]>({ queryKey: [QUERY_KEYS.MOODS], queryFn: () => [] });
+  const { data: moods } = useQuery<Mood[]>({ queryKey: [QUERY_KEYS.MOODS], queryFn: fetchMoods });
 
   if (!moods) return <div>Loading...</div>;
 
