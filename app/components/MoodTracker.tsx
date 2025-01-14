@@ -1,31 +1,25 @@
 "use client";
 
-import { useState } from "react";
-
-import { Mood } from "@/app/types";
+import { MOOD_SCORE } from "../utils/moodScore";
 import Box from "./Box";
+import { useMood } from "./MoodProvider";
 
 export default function MoodTracker() {
-  const [moods, setMoods] = useState<Mood[]>([]);
-
-  const addMood = (moodScore: number) => {
-    const today = new Date().toISOString().split("T")[0];
-    setMoods([...moods, { date: today, moodScore }]);
-  };
+  const { addMood } = useMood();
 
   return (
     <Box title="Track Your Mood">
-      <button onClick={() => addMood(3)}>😊 Happy</button>
-      <button onClick={() => addMood(2)}>😐 Neutral</button>
-      <button onClick={() => addMood(1)}>☹️ Sad</button>
-      <h3>Mood History:</h3>
-      <ul>
-        {moods.map((mood, index) => (
-          <li key={index}>
-            {mood.date}: {mood.moodScore}
-          </li>
+      <div className="flex gap-2">
+        {Object.entries(MOOD_SCORE).map(([score, label]) => (
+          <button
+            className="py-2 px-4 border border-gray-200 rounded-md hover:bg-gray-100 transition"
+            key={score}
+            onClick={() => addMood(Number(score))}
+          >
+            {label}
+          </button>
         ))}
-      </ul>
+      </div>
     </Box>
   );
 }

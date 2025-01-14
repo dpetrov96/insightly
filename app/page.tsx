@@ -9,6 +9,7 @@ import DailyInsightsSummary from "@/app/components/DailyInsightsSummary";
 import MoodTracker from "@/app/components/MoodTracker";
 import MoodAnalysis from "@/app/components//MoodAnalysis";
 import MoodTrends from "@/app/components/MoodTrends";
+import MoodHistory from "./components/MoodHistory";
 
 export default async function Page() {
   const queryClient = new QueryClient();
@@ -31,7 +32,10 @@ export default async function Page() {
         <MoodTracker />
         <MoodAnalysis />
       </div>
-      <MoodTrends />
+      <div className="grid grid-cols-2 gap-4 mb-4">
+        <MoodTrends />
+        <MoodHistory />
+      </div>
     </HydrationBoundary>
   );
 }
