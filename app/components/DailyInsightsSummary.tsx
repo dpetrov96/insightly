@@ -6,6 +6,7 @@ import { fetchTasks } from "@/app/utils/fetchTasks";
 import { fetchMoods } from "@/app/utils/fetchMoods";
 import { Mood, Task } from "@/app/types";
 import { QUERY_KEYS } from "@/app/utils/queryKeys";
+import Box from "./Box";
 
 export default function DailyInsightsSummary() {
   const { data: tasks } = useQuery<Task[]>({ queryKey: [QUERY_KEYS.TASKS], queryFn: fetchTasks });
@@ -17,10 +18,9 @@ export default function DailyInsightsSummary() {
     moods.length;
 
   return (
-    <div>
-      <h2>Daily Insights</h2>
+    <Box title="Daily Insights">
       <p>Tasks Completed Today: {tasks[tasks.length - 1]?.tasksCompleted}</p>
       <p>Average Mood Score: {moodScore.toFixed(2)}</p>
-    </div>
+    </Box>
   );
 }

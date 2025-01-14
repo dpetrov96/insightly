@@ -3,6 +3,7 @@
 import { useState } from "react";
 
 import { Mood } from "@/app/types";
+import Box from "./Box";
 
 export default function MoodTracker() {
   const [moods, setMoods] = useState<Mood[]>([]);
@@ -13,8 +14,7 @@ export default function MoodTracker() {
   };
 
   return (
-    <div>
-      <h2>Track Your Mood</h2>
+    <Box title="Track Your Mood">
       <button onClick={() => addMood(3)}>😊 Happy</button>
       <button onClick={() => addMood(2)}>😐 Neutral</button>
       <button onClick={() => addMood(1)}>☹️ Sad</button>
@@ -26,6 +26,6 @@ export default function MoodTracker() {
           </li>
         ))}
       </ul>
-    </div>
+    </Box>
   );
 }

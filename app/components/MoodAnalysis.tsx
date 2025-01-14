@@ -5,6 +5,7 @@ import { useQuery } from "@tanstack/react-query";
 import { fetchMoods } from "@/app/utils/fetchMoods";
 import { Mood } from "@/app/types";
 import { QUERY_KEYS } from "@/app/utils/queryKeys";
+import Box from "./Box";
 
 export default function MoodAnalysis() {
   const { data: moods } = useQuery<Mood[]>({ queryKey: [QUERY_KEYS.MOODS], queryFn: fetchMoods });
@@ -27,5 +28,5 @@ export default function MoodAnalysis() {
   if (decreasing)
     message = "It seems like you've been feeling a bit down. Hang in there!";
 
-  return <p>{message}</p>;
+  return <Box title="Mood Analysis">{message}</Box>;
 }

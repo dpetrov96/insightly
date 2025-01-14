@@ -26,9 +26,11 @@ export default async function Page() {
 
   return (
     <HydrationBoundary state={dehydratedState}>
-      <DailyInsightsSummary />
-      <MoodTracker />
-      <MoodAnalysis />
+      <div className="grid grid-cols-3 gap-4 mb-4">
+        <DailyInsightsSummary />
+        <MoodTracker />
+        <MoodAnalysis />
+      </div>
       <MoodTrends />
     </HydrationBoundary>
   );

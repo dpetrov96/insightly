@@ -7,6 +7,7 @@ import "chart.js/auto";
 import { fetchMoods } from "@/app/utils/fetchMoods";
 import { Mood } from "@/app/types";
 import { QUERY_KEYS } from "@/app/utils/queryKeys";
+import Box from "./Box";
 
 export default function MoodTrends() {
   const { data: moods } = useQuery<Mood[]>({ queryKey: [QUERY_KEYS.MOODS], queryFn: fetchMoods });
@@ -26,9 +27,8 @@ export default function MoodTrends() {
   };
 
   return (
-    <div>
-      <h2>Mood Trends</h2>
+    <Box title="Mood Trends">
       <Line data={data} />
-    </div>
+    </Box>
   );
 }
