@@ -8,9 +8,8 @@ import { QUERY_KEYS } from "@/app/utils/queryKeys";
 import Box from "./Box";
 
 export default function MoodAnalysis() {
-  const { data: moods } = useQuery<Mood[]>({ queryKey: [QUERY_KEYS.MOODS], queryFn: fetchMoods });
-
-  if (!moods) return <div>Loading...</div>;
+  const { data: moodsData, isLoading } = useQuery<Mood[]>({ queryKey: [QUERY_KEYS.MOODS], queryFn: fetchMoods });
+  const moods = moodsData || [];
 
   const recentMoods = moods
     .slice(-3)
@@ -28,5 +27,5 @@ export default function MoodAnalysis() {
   if (decreasing)
     message = "It seems like you've been feeling a bit down. Hang in there!";
 
-  return <Box title="Mood Analysis">{message}</Box>;
+  return <Box isLoading={isLoading} title="Mood Analysis">{message}</Box>;
 }

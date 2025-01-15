@@ -10,9 +10,12 @@ import { QUERY_KEYS } from "@/app/utils/queryKeys";
 import Box from "./Box";
 
 export default function MoodTrends() {
-  const { data: moods } = useQuery<Mood[]>({ queryKey: [QUERY_KEYS.MOODS], queryFn: fetchMoods });
+  const { data: moodsData, isLoading } = useQuery<Mood[]>({
+    queryKey: [QUERY_KEYS.MOODS],
+    queryFn: fetchMoods,
+  });
 
-  if (!moods) return <div>Loading...</div>;
+  const moods = moodsData || [];
 
   const data = {
     labels: moods?.map((mood) => mood.date),
@@ -27,7 +30,7 @@ export default function MoodTrends() {
   };
 
   return (
-    <Box title="Mood Trends">
+    <Box isLoading={isLoading} title="Mood Trends">
       <Line data={data} />
     </Box>
   );

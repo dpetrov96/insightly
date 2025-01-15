@@ -9,18 +9,37 @@ import { QUERY_KEYS } from "@/app/utils/queryKeys";
 import Box from "./Box";
 
 export default function DailyInsightsSummary() {
-  const { data: tasks } = useQuery<Task[]>({ queryKey: [QUERY_KEYS.TASKS], queryFn: fetchTasks });
-  const { data: moods } = useQuery<Mood[]>({ queryKey: [QUERY_KEYS.MOODS], queryFn: fetchMoods });
+  const { data: tasksData, isLoading: tasksIsLoading } = useQuery<Task[]>({
+    queryKey: [QUERY_KEYS.TASKS],
+    queryFn: fetchTasks,
+  });
+  const { data: moodsData, isLoading: moodsIsLoading } = useQuery<Mood[]>({
+    queryKey: [QUERY_KEYS.MOODS],
+    queryFn: fetchMoods,
+  });
 
-  if (!tasks || !moods) return <div>Loading...</div>;
+  const moods = moodsData || [];
+  const tasks = tasksData || []
+
   const moodScore =
-    moods.reduce((sum: number, mood) => sum + mood.moodScore, 0) /
-    moods.length;
+    moods?.reduce((sum: number, mood) => sum + mood.moodScore, 0) / moods?.length;
 
   return (
-    <Box title="Daily Insights">
-      <p>Tasks Completed Today: {tasks[tasks.length - 1]?.tasksCompleted}</p>
-      <p>Average Mood Score: {moodScore.toFixed(2)}</p>
+    <Box isLoading={tasksIsLoading || moodsIsLoading} title="Daily Insights">
+      <div className="space-y-2 mt-4">
+        <p className="text-sm font-medium text-gray-700">
+          Tasks Completed Today:{" "}
+          <span className="text-gray-900 font-semibold">
+            {tasks[tasks.length - 1]?.tasksCompleted}
+          </span>
+        </p>
+        <p className="text-sm font-medium text-gray-700">
+          Average Mood Score:{" "}
+          <span className="text-gray-900 font-semibold">
+            {moodScore.toFixed(2)}
+          </span>
+        </p>
+      </div>
     </Box>
   );
 }
