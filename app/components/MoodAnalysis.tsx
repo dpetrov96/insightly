@@ -16,11 +16,15 @@ export default function MoodAnalysis() {
     (score, i, arr) => i === 0 || score <= arr[i - 1]
   );
 
-  let message = "Your mood has been varying lately. Try finding balance!";
+  let message = "Your mood has been varying lately. Try finding balance! ⚖️";
   if (increasing)
-    message = "Your mood has been improving over the past few days!";
+    message = "Your mood has been improving over the past few days! 😊📈";
   if (decreasing)
-    message = "It seems like you've been feeling a bit down. Hang in there!";
+    message = "It seems like you've been feeling a bit down. Hang in there! 💙🌧️";
 
-  return <Box title="Mood Analysis">{message}</Box>;
+  return (
+    <Box title="Mood Analysis">
+      <p className="text-lg">{message}</p>
+    </Box>
+  );
 }
