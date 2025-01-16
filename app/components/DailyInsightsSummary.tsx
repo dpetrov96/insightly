@@ -9,16 +9,13 @@ import Box from "./Box";
 import { useMood } from "./MoodProvider";
 
 export default function DailyInsightsSummary() {
-  const { moods } = useMood();
+  const { moodScore } = useMood();
   const { data: tasksData, isLoading: tasksIsLoading } = useQuery<Task[]>({
     queryKey: [QUERY_KEYS.TASKS],
     queryFn: fetchTasks,
   });
 
-  const tasks = tasksData || []
-
-  const moodScore =
-    moods?.reduce((sum: number, mood) => sum + mood.moodScore, 0) / moods?.length;
+  const tasks = tasksData || [];
 
   return (
     <Box isLoading={tasksIsLoading} title="Daily Insights">

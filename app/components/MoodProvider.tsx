@@ -1,10 +1,18 @@
 "use client";
 
-import React, { createContext, useContext, useState, useEffect, ReactNode } from "react";
+import React, {
+  createContext,
+  useContext,
+  useState,
+  useEffect,
+  ReactNode,
+  useMemo,
+} from "react";
 import { Mood } from "@/app/types";
 
 interface MoodContextType {
   moods: Mood[];
+  moodScore: number;
   addMood: (moodScore: number) => void;
 }
 
@@ -35,8 +43,15 @@ export const MoodProvider = ({ children }: { children: ReactNode }) => {
     setMoods((prevMoods) => [...prevMoods, { date: today, moodScore }]);
   };
 
+  const moodScore = useMemo(
+    () =>
+      moods?.reduce((sum: number, mood) => sum + mood.moodScore, 0) /
+        moods?.length || 0,
+    [moods]
+  );
+
   return (
-    <MoodContext.Provider value={{ moods, addMood }}>
+    <MoodContext.Provider value={{ moods, moodScore, addMood }}>
       {children}
     </MoodContext.Provider>
   );
