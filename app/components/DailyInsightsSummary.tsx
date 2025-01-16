@@ -3,29 +3,25 @@
 import { useQuery } from "@tanstack/react-query";
 
 import { fetchTasks } from "@/app/utils/fetchTasks";
-import { fetchMoods } from "@/app/utils/fetchMoods";
-import { Mood, Task } from "@/app/types";
+import { Task } from "@/app/types";
 import { QUERY_KEYS } from "@/app/utils/queryKeys";
 import Box from "./Box";
+import { useMood } from "./MoodProvider";
 
 export default function DailyInsightsSummary() {
+  const { moods } = useMood();
   const { data: tasksData, isLoading: tasksIsLoading } = useQuery<Task[]>({
     queryKey: [QUERY_KEYS.TASKS],
     queryFn: fetchTasks,
   });
-  const { data: moodsData, isLoading: moodsIsLoading } = useQuery<Mood[]>({
-    queryKey: [QUERY_KEYS.MOODS],
-    queryFn: fetchMoods,
-  });
 
-  const moods = moodsData || [];
   const tasks = tasksData || []
 
   const moodScore =
     moods?.reduce((sum: number, mood) => sum + mood.moodScore, 0) / moods?.length;
 
   return (
-    <Box isLoading={tasksIsLoading || moodsIsLoading} title="Daily Insights">
+    <Box isLoading={tasksIsLoading} title="Daily Insights">
       <div className="space-y-2 mt-4">
         <p className="text-sm font-medium text-gray-700">
           Tasks Completed Today:{" "}

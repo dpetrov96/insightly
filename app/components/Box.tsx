@@ -14,7 +14,7 @@ const Box = ({ title, isLoading, children }: PropsWithChildren<Props>) => (
         {title}
       </h2>
     ) : null}
-    <div className="overflow-y-auto" style={{ maxHeight: "400px" }}>
+    <div className="overflow-y-auto" style={{ maxHeight: "300px" }}>
       {isLoading ? (
         <div className="flex items-center justify-center h-full">
           <div className="w-24 h-24 border-4 border-blue-500 border-dotted rounded-full animate-spin"></div>

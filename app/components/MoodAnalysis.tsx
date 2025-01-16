@@ -1,15 +1,10 @@
 "use client";
 
-import { useQuery } from "@tanstack/react-query";
-
-import { fetchMoods } from "@/app/utils/fetchMoods";
-import { Mood } from "@/app/types";
-import { QUERY_KEYS } from "@/app/utils/queryKeys";
 import Box from "./Box";
+import { useMood } from "./MoodProvider";
 
 export default function MoodAnalysis() {
-  const { data: moodsData, isLoading } = useQuery<Mood[]>({ queryKey: [QUERY_KEYS.MOODS], queryFn: fetchMoods });
-  const moods = moodsData || [];
+  const { moods } = useMood();
 
   const recentMoods = moods
     .slice(-3)
@@ -27,5 +22,5 @@ export default function MoodAnalysis() {
   if (decreasing)
     message = "It seems like you've been feeling a bit down. Hang in there!";
 
-  return <Box isLoading={isLoading} title="Mood Analysis">{message}</Box>;
+  return <Box title="Mood Analysis">{message}</Box>;
 }

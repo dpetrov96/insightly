@@ -2,7 +2,6 @@ import { QueryClient, dehydrate } from "@tanstack/react-query";
 import { HydrationBoundary } from "@tanstack/react-query";
 
 import { fetchTasks } from "@/app/utils/fetchTasks";
-import { fetchMoods } from "@/app/utils/fetchMoods";
 import { QUERY_KEYS } from "@/app/utils/queryKeys";
 
 import DailyInsightsSummary from "@/app/components/DailyInsightsSummary";
@@ -18,11 +17,6 @@ export default async function Page() {
   await queryClient.prefetchQuery({
     queryKey: [QUERY_KEYS.TASKS],
     queryFn: fetchTasks,
-  });
-
-  await queryClient.prefetchQuery({
-    queryKey: [QUERY_KEYS.MOODS],
-    queryFn: fetchMoods,
   });
 
   return (
