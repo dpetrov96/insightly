@@ -12,6 +12,8 @@ import { Mood } from "@/app/types";
 
 interface MoodContextType {
   moods: Mood[];
+  increasing: boolean;
+  decreasing: boolean;
   moodScore: number;
   addMood: (moodScore: number) => void;
 }
@@ -50,8 +52,21 @@ export const MoodProvider = ({ children }: { children: ReactNode }) => {
     [moods]
   );
 
+  const recentMoods = useMemo(
+    () => moods.slice(-3).map((mood: { moodScore: number }) => mood.moodScore),
+    [moods]
+  );
+
+  const increasing = recentMoods.every(
+    (score, i, arr) => i === 0 || score >= arr[i - 1]
+  );
+
+  const decreasing = recentMoods.every(
+    (score, i, arr) => i === 0 || score <= arr[i - 1]
+  );
+
   return (
-    <MoodContext.Provider value={{ moods, moodScore, addMood }}>
+    <MoodContext.Provider value={{ moods, increasing, decreasing, moodScore, addMood }}>
       {children}
     </MoodContext.Provider>
   );

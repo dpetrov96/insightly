@@ -4,17 +4,7 @@ import Box from "./Box";
 import { useMood } from "./MoodProvider";
 
 export default function MoodAnalysis() {
-  const { moods } = useMood();
-
-  const recentMoods = moods
-    .slice(-3)
-    .map((mood: { moodScore: number }) => mood.moodScore);
-  const increasing = recentMoods.every(
-    (score, i, arr) => i === 0 || score >= arr[i - 1]
-  );
-  const decreasing = recentMoods.every(
-    (score, i, arr) => i === 0 || score <= arr[i - 1]
-  );
+  const { increasing, decreasing } = useMood();
 
   let message = "Your mood has been varying lately. Try finding balance! ⚖️";
   if (increasing)
