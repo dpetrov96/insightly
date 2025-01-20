@@ -42,7 +42,7 @@ export const MoodProvider = ({ children }: { children: ReactNode }) => {
 
   const addMood = (moodScore: number) => {
     const today = new Date().toISOString().replace("T", " ").split(".")[0];
-    setMoods((prevMoods) => [...prevMoods, { date: today, moodScore }]);
+    setMoods((prevMoods) => [{ date: today, moodScore }, ...prevMoods]);
   };
 
   const moodScore = useMemo(
