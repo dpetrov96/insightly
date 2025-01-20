@@ -11,7 +11,7 @@ export default function MoodHistory() {
   return (
     <Box title="Mood History">
       {moods.length === 0 ? (
-        <p className="text-gray-500 text-sm">No mood history available.</p>
+        <p className="text-gray-500 text-sm">No mood history available. Track your mood.</p>
       ) : (
         <ul className="flex flex-col gap-4">
           {moods.map((mood, index) => (
