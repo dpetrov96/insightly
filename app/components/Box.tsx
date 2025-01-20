@@ -1,6 +1,6 @@
 "use client";
 
-import { PropsWithChildren } from "react";
+import React, { PropsWithChildren } from "react";
 
 type Props = {
   title?: string;

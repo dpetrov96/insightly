@@ -1,5 +1,6 @@
 "use client";
 
+import React from "react";
 import { MOOD_SCORE } from "../utils/moodScore";
 import Box from "./Box";
 import { useMood } from "./MoodProvider";

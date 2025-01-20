@@ -31,3 +31,19 @@ cp .env.example .env.local
 ```
 
 
+## Running Tests
+
+This project uses [Jest](https://jestjs.io/) as its testing framework.
+
+### Running All Tests
+
+To execute all tests, use the following command:
+
+```bash
+npm test
+# or
+yarn test
+# or
+pnpm test
+```
+
